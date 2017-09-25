@@ -1,7 +1,7 @@
 #!/bin/bash
 echo "Ubuntu Server 16.04 installation script for..."
 echo "- Nginx"
-echo "- Php7.1"
+echo "- php7.0"
 echo "- MariaDB"
 echo "- Git, Curl & Composer"
 echo "- Node.JS, Gulp, Bower & Socket.io"
@@ -31,16 +31,16 @@ if [ $CONTINUE = "y" ]; then
 			sudo systemctl restart nginx.service
 		fi
 	fi
-	read -p "Install PHP7.1? (y/n)" PHP
+	read -p "Install php7.0? (y/n)" PHP
 	if [ $PHP = "y" ]; then
-		sudo apt install -y php7.1 php7.1-common php7.1-curl php7.1-zip php7.1-fpm php7.1-cli php7.1-mcrypt php7.1-mbstring php7.1-mysql php7.1-xml php7.1-dev php7.1-pgsql php7.1-gd
-		sudo echo 'cgi.fix_pathinfo=0' >> /etc/php/7.1/fpm/php.ini
-		echo 'Adding cgi.fix_pathinfo=0 to /etc/php/7.1/fpm/php.ini'
+		sudo apt install -y php7.0 php7.0-common php7.0-curl php7.0-zip php7.0-fpm php7.0-cli php7.0-mcrypt php7.0-mbstring php7.0-mysql php7.0-xml php7.0-dev php7.0-pgsql php7.0-gd
+		sudo echo 'cgi.fix_pathinfo=0' >> /etc/php/7.0/fpm/php.ini
+		echo 'Adding cgi.fix_pathinfo=0 to /etc/php/7.0/fpm/php.ini'
 		read -p "Would you like to modify the FPM php.ini file? (y/n)" INI
 		if [ $INI = "y" ]; then
-			sudo nano /etc/php/7.1/fpm/php.ini
+			sudo nano /etc/php/7.0/fpm/php.ini
 		fi
-		sudo systemctl restart php7.1-fpm
+		sudo systemctl restart php7.0-fpm
 	fi
 	read -p "Install MariaDB? (y/n)" MARIADB
 	if [ $MARIADB = "y" ]; then
