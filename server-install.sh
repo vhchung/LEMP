@@ -1,7 +1,7 @@
-#!/bin/bash 
+#!/bin/bash
 echo "Ubuntu Server 16.04 installation script for..."
 echo "- Nginx"
-echo "- Php7.0"
+echo "- Php7.1"
 echo "- MariaDB"
 echo "- Git, Curl & Composer"
 echo "- Node.JS, Gulp, Bower & Socket.io"
@@ -30,17 +30,17 @@ if [ $CONTINUE = "y" ]; then
 			sudo openssl dhparam -out /etc/nginx/ssl/dhparam.pem 2048
 			sudo systemctl restart nginx.service
 		fi
-	fi	
-	read -p "Install PHP7.0? (y/n)" PHP
+	fi
+	read -p "Install PHP7.1? (y/n)" PHP
 	if [ $PHP = "y" ]; then
-		sudo apt install -y php7.0 php7.0-fpm php7.0-cli php7.0-mcrypt php7.0-mbstring php7.0-mysql
-		sudo echo 'cgi.fix_pathinfo=0' >> /etc/php/7.0/fpm/php.ini
-		echo 'Adding cgi.fix_pathinfo=0 to /etc/php/7.0/fpm/php.ini'
+		sudo apt install -y php7.1 php7.1-fpm php7.1-cli php7.1-mcrypt php7.1-mbstring php7.1-mysql php7.1-xml php7.1-dev php7.1-pgsql php7.1-redis php7.1-gd php7.1-imagick
+		sudo echo 'cgi.fix_pathinfo=0' >> /etc/php/7.1/fpm/php.ini
+		echo 'Adding cgi.fix_pathinfo=0 to /etc/php/7.1/fpm/php.ini'
 		read -p "Would you like to modify the FPM php.ini file? (y/n)" INI
 		if [ $INI = "y" ]; then
-			sudo nano /etc/php/7.0/fpm/php.ini
+			sudo nano /etc/php/7.1/fpm/php.ini
 		fi
-		sudo systemctl restart php7.0-fpm
+		sudo systemctl restart php7.1-fpm
 	fi
 	read -p "Install MariaDB? (y/n)" MARIADB
 	if [ $MARIADB = "y" ]; then
@@ -61,22 +61,22 @@ EOF
 	read -p "Install Node.js? (y/n)" NODE
 	if [ $NODE = "y" ]; then
 		echo "Please select a version of Node.js:"
-		echo "1. Node.js v 4.x LTS"
-		echo "2. Node.js v 6.x"
+		echo "1. Node.js v 6.x LTS"
+		echo "2. Node.js v 8.x"
 		read -p "Which version would you like? (1/2)" NODEV
 		if [ $NODEV = "1" ]; then
-			curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
-		else
 			curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
+		else
+			curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
 		fi
-		sudo apt-get install -y nodejs 
+		sudo apt-get install -y nodejs
 		read -p "Install Socket.io, bower & gulp? (y/n)" SIO
 		if [ $SIO = "y" ];then
 			sudo npm install -g socket.io
 			sudo npm install -g bower
 			sudo npm install -g gulp-cli
 		fi
-		
+
 	fi
 else
 	exit
