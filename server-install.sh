@@ -5,9 +5,6 @@ echo "- Php7.1"
 echo "- MariaDB"
 echo "- Git, Curl & Composer"
 echo "- Node.JS, Gulp, Bower & Socket.io"
-echo "-----------------------------------"
-echo "First install build-essential"
-sudo apt-get install -y build-essential
 read -p "Continue with installation? (y/n)" CONTINUE
 if [ $CONTINUE = "y" ]; then
 	echo "Note: Script assumes you have a file named nginx-site in script directory to be copied to /etc/nginx/sites-available"
@@ -36,7 +33,7 @@ if [ $CONTINUE = "y" ]; then
 	fi
 	read -p "Install PHP7.1? (y/n)" PHP
 	if [ $PHP = "y" ]; then
-		sudo apt install -y php7.1 php7.1-fpm php7.1-cli php7.1-mcrypt php7.1-mbstring php7.1-mysql php7.1-xml php7.1-dev php7.1-pgsql php7.1-redis php7.1-gd php7.1-imagick
+		sudo apt install -y php7.1 php7.1-common php7.1-curl php7.1-zip php7.1-fpm php7.1-cli php7.1-mcrypt php7.1-mbstring php7.1-mysql php7.1-xml php7.1-dev php7.1-pgsql php7.1-gd
 		sudo echo 'cgi.fix_pathinfo=0' >> /etc/php/7.1/fpm/php.ini
 		echo 'Adding cgi.fix_pathinfo=0 to /etc/php/7.1/fpm/php.ini'
 		read -p "Would you like to modify the FPM php.ini file? (y/n)" INI
@@ -56,9 +53,9 @@ if [ $CONTINUE = "y" ]; then
 		exit
 EOF
 	fi
-	read -p "Install Curl, Git & Composer? (y/n)" CGC
+	read -p "Install Curl, Nano, Composer? (y/n)" CGC
 	if [ $CGC = "y" ]; then
-		sudo apt-get install -y curl git
+		sudo apt-get install -y curl git nano
 		curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer
 	fi
 	read -p "Install Node.js? (y/n)" NODE
