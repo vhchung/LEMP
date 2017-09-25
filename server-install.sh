@@ -5,6 +5,9 @@ echo "- Php7.1"
 echo "- MariaDB"
 echo "- Git, Curl & Composer"
 echo "- Node.JS, Gulp, Bower & Socket.io"
+echo "-----------------------------------"
+echo "First install build-essential"
+sudo apt-get install -y build-essential
 read -p "Continue with installation? (y/n)" CONTINUE
 if [ $CONTINUE = "y" ]; then
 	echo "Note: Script assumes you have a file named nginx-site in script directory to be copied to /etc/nginx/sites-available"
